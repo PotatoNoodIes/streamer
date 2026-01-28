@@ -38,8 +38,6 @@ function getLocalDateISO() {
 }
 
 const today = getLocalDateISO();
-console.log(today)
-
 
 export default defineEventHandler(async (event) => {
   try {

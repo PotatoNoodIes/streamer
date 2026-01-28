@@ -4,5 +4,5 @@
 
 /* Custom Styles */
 body {
-  @apply bg-base-100 text-base-content min-h-screen;
+  @apply bg-streamer-bg text-white min-h-screen selection:bg-streamer-accent selection:text-black;
 }

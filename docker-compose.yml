@@ -4,7 +4,10 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "8082:3000"
+      - "30500:30500"
     environment:
       - BALLDONTLIE_API_KEY=44b16555-bf9e-4e99-8138-5299bb09e71f
       - TZ=America/Toronto
+      - HOST=0.0.0.0
+      - WATCHPACK_POLLING=true
