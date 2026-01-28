@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - BALLDONTLIE_API_KEY=44b16555-bf9e-4e99-8138-5299bb09e71f
+      - TZ=America/Toronto
