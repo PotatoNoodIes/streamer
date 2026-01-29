@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
 
+  app: {
+    baseURL: '/streamer/'
+  },
+
   runtimeConfig: {
+    balldontlieApiKey: process.env.BALLDONTLIE_API_KEY,
     public: {
       apiBase: '/api'
     }

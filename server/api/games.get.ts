@@ -41,7 +41,8 @@ const today = getLocalDateISO();
 
 export default defineEventHandler(async (event) => {
   try {
-    const apiKey = process.env.BALLDONTLIE_API_KEY;
+    const config = useRuntimeConfig();
+    const apiKey = config.balldontlieApiKey;
     const todayDate = today;
 
     const response = await axios.get('https://api.balldontlie.io/v1/games', {

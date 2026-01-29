@@ -81,68 +81,81 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-streamer-bg">
-    <div class="max-w-7xl mx-auto px-6 py-8">
+  <div class="min-h-screen bg-streamer-bg pb-10">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-8">
       <!-- TOP BAR -->
-      <div class="flex items-center justify-between mb-6">
-        <NuxtLink to="/" class="btn btn-circle btn-ghost text-gray-400 hover:text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+      <div class="flex items-center justify-between mb-4 md:mb-6">
+        <NuxtLink to="/" class="btn btn-circle btn-ghost text-gray-400 hover:text-white hover:bg-white/10">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
             stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
         </NuxtLink>
+
         <div v-if="gameStatus">
-          <span v-if="isLive(gameStatus)" class="badge bg-red-600 text-white border-none font-bold animate-pulse">
+          <span v-if="isLive(gameStatus)"
+            class="badge bg-red-600 text-white border-none font-bold animate-pulse px-3 py-3">
             LIVE
           </span>
           <span v-else-if="gameStatus.toLowerCase().includes('final')"
-            class="badge badge-ghost text-gray-500 font-bold">
+            class="badge badge-ghost text-gray-500 font-bold px-3 py-3">
             FINAL
           </span>
-          <span v-else class="badge badge-outline text-gray-400 font-bold">
+          <span v-else class="badge badge-outline text-gray-400 font-bold px-3 py-3">
             SCHEDULED
           </span>
         </div>
       </div>
 
       <!-- SCORE HEADER -->
-      <div class="card bg-streamer-card shadow-xl mb-6 border border-streamer-border">
-        <div class="card-body">
-          <div class="grid grid-cols-3 items-center">
+      <div class="card bg-streamer-card shadow-2xl mb-6 border border-streamer-border overflow-hidden">
+        <!-- Background Glow Accent -->
+        <div
+          class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-streamer-accent/50 to-transparent">
+        </div>
+
+        <div class="card-body p-4 md:p-8">
+          <div class="flex items-center justify-between md:grid md:grid-cols-3">
             <!-- AWAY -->
-            <div class="flex items-center gap-4">
-              <img :src="teamLogo(away)" class="w-16 h-16 object-contain" />
-              <h2 class="text-3xl font-black text-white tracking-tight">{{ away }}</h2>
+            <div class="flex flex-col md:flex-row items-center gap-2 md:gap-6 flex-1 md:justify-start">
+              <img :src="teamLogo(away)" class="w-12 h-12 md:w-20 md:h-20 object-contain drop-shadow-xl" />
+              <h2
+                class="text-lg md:text-4xl font-black text-white tracking-tighter text-center md:text-left leading-none">
+                {{ away }}</h2>
             </div>
 
             <!-- CENTER -->
-            <div class="text-center">
-              <div class="text-streamer-accent font-black text-2xl italic opacity-30">VS</div>
-              <div v-if="gameDate" class="text-xs text-gray-500 font-medium mt-1 uppercase tracking-widest">
+            <div class="text-center px-2 flex flex-col items-center">
+              <div class="text-streamer-accent font-black text-xl md:text-4xl italic opacity-40">VS</div>
+              <div v-if="gameDate"
+                class="text-[0.6rem] md:text-sm text-gray-500 font-bold mt-1 uppercase tracking-widest whitespace-nowrap">
                 {{ gameDate }}
               </div>
             </div>
 
             <!-- HOME -->
-            <div class="flex items-center gap-4 justify-end">
-              <h2 class="text-3xl font-black text-white tracking-tight">{{ home }}</h2>
-              <img :src="teamLogo(home)" class="w-16 h-16 object-contain" />
+            <div
+              class="flex flex-col-reverse md:flex-row items-center gap-2 md:gap-6 flex-1 justify-end md:justify-end">
+              <h2
+                class="text-lg md:text-4xl font-black text-white tracking-tighter text-center md:text-right leading-none">
+                {{ home }}</h2>
+              <img :src="teamLogo(home)" class="w-12 h-12 md:w-20 md:h-20 object-contain drop-shadow-xl" />
             </div>
           </div>
         </div>
       </div>
 
       <!-- ADBLOCK NOTICE -->
-      <div class="alert bg-streamer-card border-streamer-accent text-white mb-6 shadow-lg shadow-green-900/10">
+      <div class="alert bg-streamer-card border border-streamer-accent/20 text-white mb-6 shadow-lg shadow-green-900/5">
         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-streamer-accent shrink-0 h-6 w-6" fill="none"
           viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
-        <span>
+        <span class="text-sm md:text-base">
           Install
           <a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh"
-            target="_blank" class="font-bold text-streamer-accent hover:underline">
+            target="_blank" class="font-bold text-streamer-accent hover:underline decoration-2 underline-offset-2">
             uBlock Origin Lite
           </a>
           for a clean, ad-free stream.
@@ -150,13 +163,17 @@ onMounted(() => {
       </div>
 
       <!-- PLAYER -->
-      <div class="rounded-2xl overflow-hidden shadow-2xl bg-black border border-streamer-border relative group">
+      <div
+        class="rounded-xl md:rounded-2xl overflow-hidden shadow-2xl bg-black border border-streamer-border relative group w-full">
         <!-- Glow effect -->
         <div
-          class="absolute -inset-1 bg-gradient-to-r from-streamer-accent to-blue-600 opacity-20 blur group-hover:opacity-40 transition duration-1000">
+          class="absolute -inset-1 bg-gradient-to-r from-streamer-accent to-blue-600 opacity-20 blur-xl group-hover:opacity-30 transition duration-1000">
         </div>
-        <iframe v-if="iframeUrl" :src="iframeUrl" class="w-full aspect-video relative z-10" frameborder="0"
-          allowfullscreen></iframe>
+
+        <div class="relative w-full aspect-video bg-black">
+          <iframe v-if="iframeUrl" :src="iframeUrl" class="w-full h-full absolute inset-0" frameborder="0"
+            allowfullscreen scrolling="no"></iframe>
+        </div>
       </div>
     </div>
   </div>
