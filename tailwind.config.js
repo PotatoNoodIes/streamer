@@ -11,12 +11,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Kick/Twitch inspired palette
         streamer: {
-          bg: '#0E0E10',      // Deep charcoal/Rich black
-          card: '#18181B',    // Slightly lighter
-          border: '#26262C',  // Subtle border
-          accent: '#53FC18',  // Kick Green
+          bg: '#0E0E10',
+          card: '#18181B',
+          border: '#26262C',
+          accent: '#53FC18',
         }
       },
       fontFamily: {
@@ -26,6 +25,6 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["dark", "luxury"], // Premium feel
+    themes: ["dark", "luxury"],
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div data-theme="dark"
     class="min-h-screen flex flex-col bg-base-100 font-sans text-base-content selection:bg-primary selection:text-white">
     <TheHeader />
     <AdBlockerModal />
@@ -11,9 +11,9 @@
     <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded-t-2xl mt-auto">
       <aside>
         <p class="font-bold">
-          STREAMER <br />Providing reliable content since 2024
+          STREAMER <br />
         </p>
-        <p>Copyright © 2024 - All right reserved</p>
+        <p>Copyright © 2026 - All right reserved</p>
       </aside>
     </footer>
   </div>
