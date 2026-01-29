@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
 
+  routeRules: {
+    '/api/games': { swr: 60 },
+  },
+
   app: {
     baseURL: '/streamer/'
   },

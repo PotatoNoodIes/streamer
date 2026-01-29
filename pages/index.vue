@@ -1,6 +1,5 @@
-```
 <script setup lang="ts">
-import { computed } from 'vue';
+import { onUnmounted, onMounted } from 'vue';
 import { formatGameDate } from '~/utils/date';
 
 interface Team {
@@ -20,11 +19,19 @@ interface Game {
   date: string;
 }
 
-// PERFORMANCE FIX: Lazy fetch to prevent navigation blocking
-const { data, status } = await useFetch<Game[]>('/api/games', { lazy: true, server: false });
+const games = useState<Game[]>('cached-nba-games', () => []);
+const loading = ref(games.value.length === 0);
 
-const games = computed(() => data.value ?? []);
-const loading = computed(() => status.value === 'pending');
+const refreshGames = async () => {
+  try {
+    const data = await $fetch<Game[]>('/api/games');
+    games.value = data;
+  } catch (err) {
+    console.error('Update failed:', err);
+  } finally {
+    loading.value = false;
+  }
+};
 
 const teamLogo = (abbr: string) =>
   `https://a.espncdn.com/i/teamlogos/nba/500/${abbr}.png`;
@@ -36,6 +43,17 @@ const normalizeAbbr = (abbr: string) => {
   return abbr;
 };
 
+onMounted(() => {
+  refreshGames();
+
+  const timer = setInterval(() => {
+    refreshGames();
+  }, 60000);
+
+  onUnmounted(() => {
+    clearInterval(timer);
+  });
+});
 </script>
 
 <template>
@@ -135,4 +153,3 @@ const normalizeAbbr = (abbr: string) => {
     </section>
   </div>
 </template>
-```
