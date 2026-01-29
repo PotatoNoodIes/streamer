@@ -2,7 +2,7 @@ name: Deploy Streamer App
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -19,6 +19,10 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Create .env file
+        run: |
+          echo "BALLDONTLIE_API_KEY=${{ secrets.NBA_API_KEY }}" >> .env
 
       - name: Build Project
         run: npm run build
@@ -41,4 +45,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/jose/streamer-app
-            pm2 restart all
+            # Restart if exists, otherwise start fresh
+            pm2 restart streamer
