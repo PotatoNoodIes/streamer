@@ -24,8 +24,9 @@ const loading = ref(games.value.length === 0);
 
 const refreshGames = async () => {
   try {
+    const today = new Date().toLocaleDateString('en-CA');
     const data = await $fetch<Game[]>('/api/games', {
-      query: { t: Date.now() }
+      query: { date: today }
     });
     games.value = data;
   } catch (err) {

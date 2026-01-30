@@ -39,20 +39,19 @@ function getLocalDateISO() {
 
 
 export default defineEventHandler(async (event) => {
-  const today = getLocalDateISO();
+  const query = getQuery(event);
+  const today = query.date || getLocalDateISO();
 
   setHeader(event, 'Cache-Control', 'no-store, max-age=0, must-revalidate, no-cache');
   setHeader(event, 'Pragma', 'no-cache');
-  setHeader(event, 'Expires', '0');
 
   console.log(today);
   try {
     const config = useRuntimeConfig();
     const apiKey = config.balldontlieApiKey;
-    const todayDate = today;
 
     const response = await axios.get('https://api.balldontlie.io/v1/games', {
-      params: { 'dates[]': todayDate },
+      params: { 'dates[]': today },
       headers: { Authorization: `Bearer ${apiKey}` },
     });
 
