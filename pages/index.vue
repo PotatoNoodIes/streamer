@@ -24,7 +24,9 @@ const loading = ref(games.value.length === 0);
 
 const refreshGames = async () => {
   try {
-    const data = await $fetch<Game[]>('/api/games');
+    const data = await $fetch<Game[]>('/api/games', {
+      query: { t: Date.now() }
+    });
     games.value = data;
   } catch (err) {
     console.error('Update failed:', err);

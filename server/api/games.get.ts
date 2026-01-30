@@ -1,4 +1,4 @@
-import { defineEventHandler, getQuery } from 'h3';
+import { defineEventHandler, getQuery, setHeader } from 'h3';
 import axios from 'axios';
 
 interface Game {
@@ -40,6 +40,12 @@ function getLocalDateISO() {
 
 export default defineEventHandler(async (event) => {
   const today = getLocalDateISO();
+
+  setHeader(event, 'Cache-Control', 'no-store, max-age=0, must-revalidate, no-cache');
+  setHeader(event, 'Pragma', 'no-cache');
+  setHeader(event, 'Expires', '0');
+
+  console.log(today);
   try {
     const config = useRuntimeConfig();
     const apiKey = config.balldontlieApiKey;
