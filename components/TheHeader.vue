@@ -40,7 +40,7 @@ const closeMenu = () => {
                 <div class="flex space-x-2 bg-streamer-card p-1 rounded-full border border-streamer-border">
                     <NuxtLink v-for="tab in tabs" :key="tab.name" :to="tab.path"
                         class="px-6 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 ease-out"
-                        :class="isActive(tab.path) ? 'bg-streamer-accent text-black shadow-lg shadow-green-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'">
+                        :class="isActive(tab.path) ? 'bg-streamer-accent text-black shadow-lg shadow-streamer-accent/20' : 'text-gray-400 hover:text-white hover:bg-white/5'">
                         {{ tab.name }}
                     </NuxtLink>
                 </div>

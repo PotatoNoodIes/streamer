@@ -1,5 +1,10 @@
+<script setup lang="ts">
+const route = useRoute();
+const isF1Theme = computed(() => route.path.startsWith('/f1') ? 'true' : undefined);
+</script>
+
 <template>
-  <div data-theme="dark"
+  <div data-theme="dark" :data-f1-theme="isF1Theme"
     class="min-h-screen flex flex-col bg-base-100 font-sans text-base-content selection:bg-primary selection:text-white">
     <TheHeader />
     <AdBlockerModal />

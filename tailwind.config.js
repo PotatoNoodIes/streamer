@@ -15,7 +15,7 @@ module.exports = {
           bg: '#0E0E10',
           card: '#18181B',
           border: '#26262C',
-          accent: '#53FC18',
+          accent: 'rgb(var(--streamer-accent) / <alpha-value>)',
         }
       },
       fontFamily: {

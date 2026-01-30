@@ -37,9 +37,9 @@ function getLocalDateISO() {
   return local.toISOString().split('T')[0];
 }
 
-const today = getLocalDateISO();
 
 export default defineEventHandler(async (event) => {
+  const today = getLocalDateISO();
   try {
     const config = useRuntimeConfig();
     const apiKey = config.balldontlieApiKey;

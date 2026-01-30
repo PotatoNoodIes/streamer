@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Styles */
-body {
-  @apply bg-streamer-bg text-white min-h-screen selection:bg-streamer-accent selection:text-black;
+:root {
+  /* Default Global: #22c55e -> RGB: 34 197 94 */
+  --streamer-accent: 34 197 94;
+}
+
+[data-f1-theme="true"] {
+  /* F1 Red: #FF1801 -> RGB: 255 24 1 */
+  --streamer-accent: 255 24 1;
+}
+
+@layer utilities {
+    .skew-f1 {
+        transform: skewX(-12deg);
+        transform-origin: center;
+    }
 }
