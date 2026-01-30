@@ -43,6 +43,7 @@ const isLive = (status: string) => status.toLowerCase().includes('live');
 
 const normalizeAbbr = (abbr: string) => {
   if (abbr === 'UTA') return 'UTAH';
+  if (abbr === 'NOP') return 'NO';
   return abbr;
 };
 
